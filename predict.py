@@ -63,6 +63,6 @@ class NLPModel:
         return (label, p)
     
 if __name__ == "__main__":
-   model = NLPModel('mình giới_tính nam') 
+   model = NLPModel('tên của mình chưa đúng nhé.') 
    (label, p) = model.predict()
            
