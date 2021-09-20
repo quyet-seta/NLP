@@ -20,12 +20,6 @@ num2label = ['affirm_confirm', 'ask_gender_wrong', 'no_date', 'provide_gender',
 def normalize_sentence(s):
     s = re.sub('Ð', 'đ', s)
     s = s.lower()
-    s = re.sub('2', 'hai', s)
-    s = re.sub('3', 'ba', s)
-    s = re.sub('4', 'tư', s)
-    s = re.sub('5', 'năm', s)
-    s = re.sub('6', 'sáu', s)
-    s = re.sub('7', 'bảy', s)
     s = re.sub('-', '', s)
     s = re.sub(',', '', s)
     s = re.sub("\.", '', s)
@@ -63,6 +57,6 @@ class NLPModel:
         return (label, p)
     
 if __name__ == "__main__":
-   model = NLPModel('Tôi muốn đặt khoa thần kinh') 
+   model = NLPModel('anh hiện tại 22') 
    (label, p) = model.predict()
            
