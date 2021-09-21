@@ -57,6 +57,6 @@ class NLPModel:
         return (label, p)
     
 if __name__ == "__main__":
-   model = NLPModel('anh hiện tại 22') 
+   model = NLPModel('sai rồi em') 
    (label, p) = model.predict()
            
