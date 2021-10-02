@@ -13,12 +13,10 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import pickle
 import numpy as np
 
-num2label = ['affirm_confirm', 'ask_gender_wrong', 'no_date', 'provide_gender', 
-             'ask_age_wrong', 'ask_date_wrong','provide_age', 'ask_name_wrong',
-             'pick date', 'provide_name', 'cannot_hear', 'choose_department',        'deny_confirm']
+num2label = ['affirm', 'cannot_hear', 'deny', 'describe_symptoms', 'provide_address', 
+              'provide_age', 'provide_contact', 'provide_name']
 
 def normalize_sentence(s):
-    s = re.sub('Ð', 'đ', s)
     s = s.lower()
     s = re.sub('-', '', s)
     s = re.sub(',', '', s)
@@ -34,7 +32,7 @@ def normalize_sentence(s):
     return s
           
 def padding_sentence(s):
-    with open('tokenizer.pickle', 'rb') as handle:
+    with open('tokenizer_24h.pickle', 'rb') as handle:
          tokenizer = pickle.load(handle)
     test_sequence = tokenizer.texts_to_sequences([s])
     padded_test_sequences = pad_sequences(test_sequence, maxlen=20, truncating="post", padding="post")
@@ -43,7 +41,7 @@ def padding_sentence(s):
 class NLPModel:
     def __init__(self, sentence):
         self.sentence = sentence
-        self.model = load_model("NLPModel.h5")
+        self.model = load_model("NLPModel_24h.h5")
     
     def predict(self):
         normal_sentence = normalize_sentence(self.sentence)
@@ -57,6 +55,6 @@ class NLPModel:
         return (label, p)
     
 if __name__ == "__main__":
-   model = NLPModel('sai rồi em') 
+   model = NLPModel('- mình bị nóng đầu, ho có đờm, mệt mỏi, ăn không thấy vị gì, đau rát họng, đầu bị đau, không thở được dễ dàng,') 
    (label, p) = model.predict()
            
